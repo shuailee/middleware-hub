@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间应该是对应接口的包名+接口名，命名空间的作用有两个，一个是利用更长的完全限定名来将不同的语句隔离开来，同时也实现了接口绑定 -->
+<mapper namespace="com.shuailee.study.webmagicdemo.services.INews">
+
+    <!--开启二级缓存-->
+    <cache />
+
+
+    <!--
+    主键支持：如果你的数据库支持自动生成主键的字段，那么你可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上就 OK
+    例如user_id 主键自增
+    -->
+    <insert id="insertNews" parameterType="com.shuailee.study.webmagicdemo.model.News"
+            useGeneratedKeys="true" keyProperty="id">
+         insert into news (title,content)
+         values (#{title},#{content})
+    </insert>
+
+    <!--多行插入-->
+    <insert id="batchInsertNews" parameterType="com.shuailee.study.webmagicdemo.model.News"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into news (title,content) values
+        <foreach item="item" collection="list" separator=",">
+            values (#{title},#{content})
+        </foreach>
+    </insert>
+
+    </mapper>
+
+
+

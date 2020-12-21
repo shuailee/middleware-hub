@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--
+XML 配置文件中包含了对 MyBatis 系统的核心设置，包含获取数据库连接实例的数据源（DataSource）和决定事务作用域和控制方式的事务管理器
+（TransactionManager）
+-->
+<configuration>
+    <settings>
+        <!--开启了此配置后，字段名称可以从数据库字段命名风格user_name自动推断为java驼峰命名规则：userName
+        如果数据库字段和javaben差异太大一样会导致推断失败
+        -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!--全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存。全局关闭二级缓存 -->
+        <!--<setting name="cacheEnabled" value="true"/>-->
+        <!--设置本地缓存的作用域,默认SESSION，SESSION会缓存一个会话中的所有查询，STATEMENT，本地会话仅用在语句执行上，对相同 SqlSession 的不同调用将不会共享数据-->
+        <setting name="localCacheScope" value="SESSION"/>
+
+        <!--记录sqlsession执行日志   STDOUT_LOGGING 打印到控制台  LOG4J 记录到LOG4J-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/><!--LOG4J-->
+    </settings>
+
+    <!--&lt;!&ndash;类型别名&ndash;&gt;
+    <typeAliases>
+        <typeAlias type="com.shuailee.model.User"  alias="User" />
+    </typeAliases>
+
+    &lt;!&ndash;重写类型处理器或创建你自己的类型处理器来处理不支持的或非标准的类型,让 MyBatis 为你查找类型处理器&ndash;&gt;
+    <typeHandlers>
+        <typeHandler handler="com.shuailee.common.ExampleTypeHandler"/>
+    </typeHandlers>
+    &lt;!&ndash;如果想覆盖对象工厂的默认行为，则可以通过创建自己的对象工厂来实现&ndash;&gt;
+    <objectFactory type="com.shuailee.common.ExampleObjectFactory">
+        <property name="someProperty" value="100"/>
+    </objectFactory>
+    &lt;!&ndash;自定义插件&ndash;&gt;
+    <plugins>
+        <plugin interceptor="com.shuailee.common.MonitorSQLExecutionTimePlugin"/>
+    </plugins>-->
+
+
+    <!--多环境配置（environments）-->
+    <environments default="development">
+        <!--环境development，为默认（密码故意给错了）-->
+        <environment id="development">
+            <!--事物管理器：[JDBC|MANAGED]-->
+            <transactionManager type="JDBC"/>
+            <!--数据源配置（dataSource）:[UNPOOLED|POOLED|JNDI]-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3302/shuai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="111!"/>
+            </dataSource>
+        </environment>
+        <!--环境pro，需要在构建SqlSessionFactory 实例时指定的环境（密码是对的）-->
+        <environment id="pro">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3302/shuai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="111!"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--告诉MyBatis 到哪里去找映射文件
+     1 使用相对于类路径的资源引用
+     2 使用完全限定资源定位符（URL）
+     3 使用映射器接口实现类的完全限定类名
+     4 将包内的映射器接口实现全部注册为映射器
+    -->
+    <mappers>
+        <mapper resource="mapper/news.xml"/>
+    </mappers>
+    
+
+
+</configuration>
+
+<!--
+还有很多可以在 XML 文件中进行配置，上面的示例指出的则是最关键的部分。 要注意 XML 头部的声明，它用来验证 XML 文档正确性。
+environment 元素体中包含了事务管理和连接池的配置。
+mappers 元素则是包含一组映射器（mapper），这些映射器的 XML 映射文件包含了 SQL 代码和映射定义信息-->
