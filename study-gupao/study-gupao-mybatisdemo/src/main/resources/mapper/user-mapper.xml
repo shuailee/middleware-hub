@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--命名空间应该是对应接口的包名+接口名，命名空间的作用有两个，一个是利用更长的完全限定名来将不同的语句隔离开来，同时也实现了接口绑定 -->
+<mapper namespace="com.shuailee.dao.IUserDao">
+
+    <!--开启二级缓存-->
+    <cache />
+
+    <!--查询用户信息
+    1 将查询数据库结果映射到User javaBen,根据属性字段名自动映射；这样的一个 JavaBean 可以被映射到 ResultSet
+    2 resultType也可以使用mybatis-config.xml声明的typeAlias类型别名，这样就可以不用输入类的完全限定名称了：如：resultType="User"
+
+    1  SQL语句中的flushCache="true"，可以理解为每次执行SQL之前都会主动清空缓存（1级和2级都会被清空），
+    然后再从数据库中查询结果，在查询语句中默认值为false，其他情况下为true
+    2 SQL语句中的useCache="true" 默认为true 执行语句时使用缓存
+    -->
+    <select id="queryUser" resultType="com.shuailee.model.User" flushCache="true">
+        SELECT * FROM tb_user
+    </select>
+
+
+    <!--这个语句被称作 queryUserByID，接受一个 int（或 Integer）类型的参数，并返回一个 HashMap 类型的对象，其中的键是列名，值便是结果行中的对应值
+    parameterType 入参类型
+    resultType  返回数据类型，如果返回的是集合，那应该设置为集合包含的类型，而不是集合本身，resultType , resultMap，不能同时使用。
+    resultMap 外部 resultMap 的命名引用,结果集的映射是 MyBatis 最强大的特性，如果你对其理解透彻，许多复杂映射的情形都能迎刃而解
+    flushCache	将其设置为 true 后，只要语句被调用，都会导致本地缓存和二级缓存被清空，默认值：false。
+    useCache	将其设置为 true 后，将会导致本条语句的结果被二级缓存缓存起来，默认值：对 select 元素为 true。
+    -->
+    <select id="queryUserByID" parameterType="int" resultType="hashmap" >
+        SELECT * FROM tb_user WHERE user_id = #{id}
+    </select>
+    <!--
+    主键支持：如果你的数据库支持自动生成主键的字段，那么你可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上就 OK
+    例如user_id 主键自增
+    -->
+    <insert id="insertUser" parameterType="com.shuailee.model.User"
+            useGeneratedKeys="true" keyProperty="user_id">
+         insert into tb_user (user_name,user_sex,user_birthday,user_address,user_email)
+         values (#{user_name},#{user_sex},#{user_birthday},#{user_address},#{user_email})
+    </insert>
+
+    <!--多行插入-->
+    <insert id="batchInsertUser" parameterType="com.shuailee.model.User"
+            useGeneratedKeys="true" keyProperty="user_id">
+        insert into tb_user (user_name,user_sex,user_birthday,user_address,user_email) values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.user_name}, #{item.user_sex}, #{item.user_birthday}, #{item.user_address}, #{item.user_email})
+        </foreach>
+    </insert>
+
+    <!--修改-->
+    <update id="updateUser" parameterType="com.shuailee.model.User">
+        update tb_user set
+        user_name = #{user_name},
+        user_birthday= #{user_birthday},
+        user_sex = #{user_sex},
+        user_email = #{user_email}
+        where user_id = #{user_id}
+    </update>
+
+    <delete id="deleteUserByID" parameterType="int">
+        delete from tb_user where user_id = #{id}
+    </delete>
+
+
+    <!--动态sql语句-->
+
+    <!--1 多条件查询判断 if-->
+    <select id="queryUserinfo" parameterType="java.util.Map" resultType="com.shuailee.model.UserModel">
+        SELECT * FROM tb_user WHERE user_sex = #{sex}
+        /*name参数也支持传入通配符*/
+        <if test="name != null">
+            AND user_name like #{name}
+        </if>
+    </select>
+
+    <!--2 多条件查询判断连续拼接 if+where-->
+    <!--
+     “where”标签如果它包含的标签中有返回值的话，它就插入一个‘where’。
+          如果标签返回的内容是以AND 或OR 开头的，则会剔除掉AND 或or
+    -->
+    <select id="queryUserinfo2" parameterType="java.util.Map" resultType="com.shuailee.model.UserModel">
+        SELECT * FROM tb_user
+        <where>
+            <if test="sex != null">
+                AND user_sex = #{sex}
+            </if>
+            <if test="name != null">
+                AND user_name like #{name}
+            </if>
+        </where>
+    </select>
+
+    <!--3 choose when标签,当我们值需要多个条件中的一个时使用：例如当sex不为空的时候只使用sex不用后面的所有条件-->
+    <!-- 如果 sex 不为空，那么查询语句为：select * from user where  user_sex=?
+    　    如果 sex 为空，name 是否为空，如果不为空，那么语句为 select * from user where  user_name=?;
+          如果 sex 为空，name 为空，那么语句为 select * from user where  user_email=?;-->
+    <select id="queryUserinfo3" parameterType="java.util.Map" resultType="com.shuailee.model.UserModel">
+        SELECT * FROM tb_user
+        <where>
+            <choose>
+                <when test="sex != null">
+                    AND user_sex = #{sex}
+                </when>
+                <when test="name != null">
+                    AND user_name like #{name}
+                </when>
+                <otherwise>
+                    and user_email=#{email}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+
+
+    <!--4 多字段更新判断 update if-->
+    <update id="updateUserById" parameterType="com.shuailee.model.UserModel">
+     update tb_user
+         <set>
+             <if test="userName!=null and userName!=''">
+                 user_name = #{userName},
+             </if>
+             <if test="userSex!=null and userSex!=''">
+                 user_sex = #{userSex}
+             </if>
+         </set>
+            where user_id = #{userId}
+    </update>
+
+    <!--5  trim 格式化标记-->
+    <!-- 例子中来完成where标记的功能
+        prefix：前缀　　　　　　
+    　　prefixoverride：去掉第一个and或者是or
+    -->
+    <select id="queryUserinfo4" parameterType="java.util.Map" resultType="com.shuailee.model.UserModel">
+        SELECT * FROM tb_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="sex != null">
+                AND user_sex = #{sex}
+            </if>
+            <if test="name != null">
+                AND user_name like #{name}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 例子中来完成set标记的功能
+    　  suffix：后缀　　
+    　　suffixoverride：去掉最后一个逗号（也可以是其他的标记，就像是上面前缀中的and一样）
+    -->
+        <update id="updateUserById2" parameterType="com.shuailee.model.UserModel">
+            update tb_user
+            <trim prefix="set" suffixOverrides=",">
+                <if test="userName!=null and userName!=''">
+                    user_name = #{userName},
+                </if>
+                <if test="userSex!=null and userSex!=''">
+                    user_sex = #{userSex}
+                </if>
+            </trim>
+            where user_id = #{userId}
+        </update>
+
+    <!--6 sql include命令 定义sql片段，在别的地方引用，可以增加代码的重用性-->
+    <!--定义一个条件筛选的判断-->
+    <sql id="selectUserByPara">
+        <if test="userName!=null and userName!=''">
+            user_name = #{userName},
+        </if>
+        <if test="userSex!=null and userSex!=''">
+            user_sex = #{userSex}
+        </if>
+    </sql>
+
+    <!--修改引用-->
+    <update id="updateUserById3" parameterType="com.shuailee.model.UserModel">
+        update tb_user
+        <trim prefix="set" suffixOverrides=",">
+            <!-- 引用 sql 片段，如果refid 指定的不在本文件中，那么需要在前面加上 namespace -->
+            <include refid="selectUserByPara"></include>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <!--7 foreach 标记-->
+    <!--
+                collection:指定输入对象中的集合属性
+                item:每次遍历生成的对象
+                open:开始遍历时的拼接字符串
+                close:结束时拼接的字符串
+                separator:遍历对象之间需要拼接的字符串
+              -->
+
+    <!--1 多行插入-->
+    <insert id="batchInsertUser2" parameterType="com.shuailee.model.User"
+            useGeneratedKeys="true" keyProperty="user_id">
+        insert into tb_user (user_name,user_sex,user_birthday,user_address,user_email) values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.user_name}, #{item.user_sex}, #{item.user_birthday}, #{item.user_address}, #{item.user_email})
+        </foreach>
+    </insert>
+
+    <!--2 我们用 foreach 来改写 select * from user where id=1 or id=2 or id=3
+
+    注意：
+    参数类型为List  collection="list"
+    参数类型为ArrayList  collection="values[]"
+    -->
+    <select id="queryUserbyids" resultType="com.shuailee.model.User" parameterType="java.util.List">
+        SELECT * FROM tb_user
+        <where>
+            <foreach collection="list" item="id" open=" (" close=")" separator="or">
+                 user_id = #{id}
+            </foreach>
+        </where>
+    </select>
+
+    </mapper>
+
+
+

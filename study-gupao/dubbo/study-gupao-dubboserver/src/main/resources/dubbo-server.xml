@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://code.alibabatech.com/schema/dubbo
+                        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!--dubbo 注册方信息-->
+    <dubbo:application name="debbo-server" owner="shuaishuai"></dubbo:application>
+    <!--注册中心  N/A 不需要，zookeper，redis..-->
+    <!--<dubbo:registry address="N/A" />-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+    <!--协议，端口-->
+    <dubbo:protocol name="dubbo" port="20880" />
+
+
+    <!--发布服务和实现-->
+    <dubbo:service interface="com.shuailee.IHello" ref="helloService" version="1.0.0" />
+    <bean id="helloService" class="com.shuailee.provider.HelloImpl"></bean>
+
+    <!--发布服务和实现 版本号为2-->
+    <dubbo:service interface="com.shuailee.IHello" ref="helloService2" version="1.0.1"  />
+    <bean id="helloService2" class="com.shuailee.provider.HelloTwoImpl"></bean>
+
+
+
+    <!--发布服务和实现-->
+    <dubbo:service interface="com.shuailee.IPay" ref="payService" version="1.0.2" />
+    <bean id="payService" class="com.shuailee.provider.PayImpl"></bean>
+
+</beans>

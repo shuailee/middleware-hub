@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://code.alibabatech.com/schema/dubbo
+                        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!--dubbo 注册方信息-->
+    <dubbo:application name="debbo-client" owner="shuai"></dubbo:application>
+    <!--注册中心  N/A 不需要-->
+  <!--  <dubbo:registry address="N/A" />-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" />
+    <!--协议，端口-->
+    <dubbo:protocol name="dubbo" port="20880" />
+
+    <!--没有使用注册中心的情况下：根据发布的服务的url，和服务接口名通过 反射调用.
+    当使用注册中心时，不需要指定url
+    -->
+    <!--<dubbo:reference id="helloService"  interface="com.shuailee.IHello"
+                     url="dubbo://192.168.220.1:20880/com.shuailee.IHello"/>-->
+
+<!--正常配置，包含了版本号-->
+    <dubbo:reference id="helloService"  interface="com.shuailee.IHello" version="1.0.1"/>
+
+    <dubbo:reference id="payService"  interface="com.shuailee.IPay" version="1.0.2"/>
+<!--配置集群容错： 加入 cluster="failover"-->
+
+<!--配置mock-->
+    <!--1 在客户端创建Mock类HelloTestMock-->
+    <!--2 在消费方配置中加入mock节点，并指向HelloTestMock-->
+    <!--3 模拟错误，超时时间设置2毫秒。集群容错策略为默认或报错情况下会走mock，如果配置成failsafe不会走mock，会立马返回null -->
+    <!--<dubbo:reference id="helloService"  interface="com.shuailee.IHello"
+                     version="1.0.1"
+                     cluster="failover"
+                     mock="com.shuailee.mock.HelloTestMock" timeout="2"/>-->
+
+
+</beans>
