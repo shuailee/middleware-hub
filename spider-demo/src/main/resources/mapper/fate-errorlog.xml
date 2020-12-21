@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geek.calendar.spider.service.ErrorlogService">
+
+    <!--开启二级缓存-->
+    <cache/>
+
+    <insert id="insertErrorlog" parameterType="com.geek.calendar.spider.model.ErrorlogInfo"
+            useGeneratedKeys="true" keyProperty="id">
+         insert into fate_log_1 (url,parameter,errortype,errorcode)
+         values (#{url},#{parameter},#{errortype},#{errorcode})
+    </insert>
+
+    <update id="updateLogStatus" parameterType="String" >
+         update fate_log_1 set status = 2 where parameter = #{parameter}
+    </update>
+
+
+
+    <select  id="queryParameter" parameterType="String" resultType="String">
+         select parameter from fate_log_1 where parameter like #{year} and status = 1;
+    </select >
+
+</mapper>
+
+
+

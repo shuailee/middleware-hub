@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+    <settings>
+        <!--记录sqlsession执行日志   STDOUT_LOGGING 打印到控制台  LOG4J 记录到LOG4J-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/><!--LOG4J-->
+    </settings>
+
+
+    <environments default="dev">
+        <environment id="dev">
+            <!--事物管理器：[JDBC|MANAGED]-->
+            <transactionManager type="JDBC"/>
+            <!--数据源配置（dataSource）:[UNPOOLED|POOLED|JNDI]-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://rm-uf6muqdsogu7h721oro.mysql.rds.aliyuncs.com:3306/jirili_dev"/>
+                <property name="username" value="jirili"/>
+                <property name="password" value="gjz1opsdsbJefcDkbC"/>
+            </dataSource>
+        </environment>
+
+        <!--<environment id="pro">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://rm-uf6muqdsogu7h721oro.mysql.rds.aliyuncs.com:3306/jirili_dev?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+"/>
+                <property name="username" value="jirili"/>
+                <property name="password" value="gjz1opsdsbJefcDkbC"/>
+            </dataSource>
+        </environment>-->
+    </environments>
+
+
+    <mappers>
+        <mapper resource="mapper/fate-mapper.xml"/>
+    </mappers>
+    
+
+
+</configuration>

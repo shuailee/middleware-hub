@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geek.calendar.spider.service.FateService">
+
+    <!--开启二级缓存-->
+    <cache/>
+
+    <insert id="insertFate" parameterType="com.geek.calendar.spider.model.Fate"
+            useGeneratedKeys="true" keyProperty="id">
+         insert into fate_2020_193 (sex,year,month,day,hour,minute,birthday,shuxiang,shengong,wuxing,mingzhu,doujun,shenzhu,
+         nupugong,qianyigong,jiegong,caibogong,shiyegong,tianzhaigong,fudegong,fumugong,minggong,xiongdigong,fuqigong,zinvgong,
+         nupugong_xingxiu,qianyigong_xingxiu,jiegong_xingxiu,caibogong_xingxiu,shiyegong_xingxiu,tianzhaigong_xingxiu,fudegong_xingxiu,
+         fumugong_xingxiu,minggong_xingxiu,xiongdigong_xingxiu,fuqigong_xingxiu,zinvgong_xingxiu)
+         values (#{sex},#{year},#{month},#{day},#{hour},#{minute},#{birthday},#{shuXiang},#{shenGong},#{wuXing},#{mingZhu},#{douJun},#{shenZhu},
+         #{nupuGong},#{qianYiGong},#{jiEGong},#{caiBoGong},#{shiYeGong},#{tianZhaiGong},#{fuDeGong},#{fuMuGong},#{mingGong},#{xiongDiGong},#{fuQiGong},
+         #{ziNvGong},#{nuPuGongXingXiu},#{qianYiGongXingXiu},#{jiEGongXingXiu},#{caiBoGongXingXiu},#{shiYeGongXingXiu},#{tianZhaiGongXingXiu},#{fudeGongXingXiu},
+         #{fuMuGongXingXiu},#{mingGongXingXiu},#{xiongDiGongXingXiu},#{fuQiGongXingXiu},#{ziNvGongXingXiu})
+    </insert>
+
+    <!--多行插入-->
+    <insert id="batchInsertFates" parameterType="com.geek.calendar.spider.model.Fate"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into fate_2020_193 (sex,year,month,day,hour,minute,birthday,shuxiang,shengong,wuxing,mingzhu,doujun,shenzhu,
+        nupugong,qianyigong,jiegong,caibogong,shiyegong,tianzhaigong,fudegong,fumugong,minggong,xiongdigong,fuqigong,zinvgong,
+        nupugong_xingxiu,qianyigong_xingxiu,jiegong_xingxiu,caibogong_xingxiu,shiyegong_xingxiu,tianzhaigong_xingxiu,fudegong_xingxiu,
+        fumugong_xingxiu,minggong_xingxiu,xiongdigong_xingxiu,fuqigong_xingxiu,zinvgong_xingxiu)
+        values
+        <foreach item="item" collection="list" separator=",">
+            (#{sex},#{year},#{month},#{day},#{hour},#{minute},#{birthday},#{shuXiang},#{shenGong},#{wuXing},#{mingZhu},#{douJun},#{shenZhu},
+            #{nupuGong},#{qianYiGong},#{jiEGong},#{caiBoGong},#{shiYeGong},#{tianZhaiGong},#{fuDeGong},#{fuMuGong},#{mingGong},#{xiongDiGong},#{fuQiGong},
+            #{ziNvGong},#{nuPuGongXingXiu},#{qianYiGongXingXiu},#{jiEGongXingXiu},#{caiBoGongXingXiu},#{shiYeGongXingXiu},#{tianZhaiGongXingXiu},#{fudeGongXingXiu},
+            #{fuMuGongXingXiu},#{mingGongXingXiu},#{xiongDiGongXingXiu},#{fuQiGongXingXiu},#{ziNvGongXingXiu})
+        </foreach>
+    </insert>
+
+</mapper>
+
+
+

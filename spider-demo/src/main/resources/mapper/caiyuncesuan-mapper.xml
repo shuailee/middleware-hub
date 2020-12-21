@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geek.calendar.spider.service.CaiyunCesuanService">
+
+    <!--开启二级缓存-->
+    <cache/>
+
+    <insert id="insertCaiyunCesuan" parameterType="com.geek.calendar.spider.model.CaiyunCesuanInfo"
+            useGeneratedKeys="true" keyProperty="id">
+         insert into yishengcaiyun_200 (sex,year,month,day,hour, minute, birthday, yscf_pingfen, yscf_xiangjie,zcy_pingfen,
+         zcy_xiangjie, pcy_pingfen,pcy_xiangjie,pcjl_pingfen, pcjl_xiangjie,qncy_pingfen,qncy_xiangjie,zncy_pingfen,
+         zncy_xiangjie,lncy_pingfen, lncy_xiangjie)
+         values (#{sex},#{year},#{month},#{day},#{hour},#{minute},#{birthday},#{yscf_Pingfen},#{yscf_Xiangjie},#{zcy_Pingfen},
+#{zcy_Xiangjie},#{pcy_Pingfen},#{pcy_Xiangjie},#{pcjl_Pingfen},#{pcjl_Xiangjie},#{qncy_Pingfen},#{qncy_Xiangjie},
+#{zncy_Pingfen},#{zncy_Xiangjie},#{lncy_Pingfen},#{lncy_Xiangjie})
+    </insert>
+
+    <!--多行插入-->
+    <insert id="batchCaiyunCesuan" parameterType="com.geek.calendar.spider.model.CaiyunCesuanInfo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into yishengcaiyun_200 (sex,year,month,day,hour, minute, birthday, yscf_pingfen,yscf_xiangjie,zcy_pingfen,
+        zcy_xiangjie, pcy_pingfen,pcy_xiangjie,pcjl_pingfen, pcjl_xiangjie,qncy_pingfen,qncy_xiangjie,zncy_pingfen,
+        zncy_xiangjie,lncy_pingfen, lncy_xiangjie)
+        values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.sex},#{item.year},#{item.month},#{item.day},#{item.hour},#{item.minute},#{item.birthday},#{item.yscf_Pingfen},#{item.yscf_Xiangjie},#{item.zcy_Pingfen},
+            #{item.zcy_Xiangjie},#{item.pcy_Pingfen},#{item.pcy_Xiangjie},#{item.pcjl_Pingfen},#{item.pcjl_Xiangjie},#{item.qncy_Pingfen},#{item.qncy_Xiangjie},
+            #{item.zncy_Pingfen},#{item.zncy_Xiangjie},#{item.lncy_Pingfen},#{item.lncy_Xiangjie})
+        </foreach>
+    </insert>
+
+</mapper>
+
+
+
