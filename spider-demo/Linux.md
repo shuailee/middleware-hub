@@ -1,12 +1,12 @@
 1. rm -f webmagic.log  删除文件
 
-2. java -cp geek-calendar-spider.jar com.geek.calendar.spider.spilder.FatePageProcessor  【运行main  關閉連接窗口會導致程序停止執行】
+2. java -cp spider-demo.jar com.geek.calendar.spider.spilder.FatePageProcessor  【运行main  關閉連接窗口會導致程序停止執行】
 
 3. "&" 【符号结尾表示，让程序在后台运行，但是關閉鏈接窗口會導致程序停止】
 
 4. nohup 【命令可以阻止窗口关闭是的挂断信号，使程序继续运行】
 
-5. nohup java  -cp geek-calendar-spider.jar com.geek.calendar.spider.spilder.FatePageProcessor &   【讓程序在後臺執行，關閉窗口時程序繼續執行； 命令執行會返回一個進程號，記住此進程號，可以使用kill -9 進程號殺死它】（3600）
+5. nohup java  -cp spider-demo.jar com.geek.calendar.spider.spilder.FatePageProcessor &   【讓程序在後臺執行，關閉窗口時程序繼續執行； 命令執行會返回一個進程號，記住此進程號，可以使用kill -9 進程號殺死它】（3600）
 
 6. nohup java -jar xxx.jar &    【也可以這樣】
 

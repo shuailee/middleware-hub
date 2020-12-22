@@ -22,9 +22,9 @@ import java.text.ParseException;
 import java.util.*;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: YiShengCaifuProcessor
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-17 22:00
  **/
 @Slf4j

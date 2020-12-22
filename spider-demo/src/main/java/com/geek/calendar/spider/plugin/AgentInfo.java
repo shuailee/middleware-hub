@@ -17,16 +17,16 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: AgentInfo
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-20 17:26
  **/
 @Slf4j
 public class AgentInfo {
     static String proxy_username = "cctvendtp1";
     static String proxy_passwd = "21112888";
-    public static String proxy_server = "183.129.244.16";
+    public static String proxy_server = "183.129.244.xx";
     static String proxy_port = "88";
     static String pattern = "json";
     static int num = 1;

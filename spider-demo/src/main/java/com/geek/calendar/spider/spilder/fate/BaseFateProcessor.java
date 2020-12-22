@@ -18,9 +18,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: BaseFateProcessor
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-22 17:13
  **/
 @Slf4j

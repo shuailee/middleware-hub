@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FateService
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-16 11:11
  **/
 @Mapper

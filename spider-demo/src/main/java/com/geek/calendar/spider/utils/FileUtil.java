@@ -10,13 +10,6 @@ import javax.annotation.Resource;
 import java.io.*;
 
 
-/**
- * @version V1.0
- * @ClassName FileUtil
- * @Description
- * @Author zhangyue
- * @Date 2018/1/9 20:58
- */
 public class FileUtil {
 
     public static void main(String[] args) throws IOException {

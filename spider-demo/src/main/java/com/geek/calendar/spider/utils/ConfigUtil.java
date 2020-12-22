@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.Properties;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: ConfigUtil
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-16 16:15
  **/
 @Data

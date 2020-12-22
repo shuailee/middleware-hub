@@ -13,9 +13,9 @@ import java.util.GregorianCalendar;
 
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FateUtil
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-15 15:45
  **/
 public class FateUtil {

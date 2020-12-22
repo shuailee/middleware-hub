@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: DButils
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-16 14:22
  **/
 public class DButils {

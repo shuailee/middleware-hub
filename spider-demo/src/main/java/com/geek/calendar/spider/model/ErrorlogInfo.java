@@ -3,9 +3,9 @@ package com.geek.calendar.spider.model;
 import lombok.*;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: ErrorlogInfo
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-17 16:37
  **/
 @AllArgsConstructor

@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: YishengCaiyunPipeline
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-18 18:14
  **/
 @Slf4j

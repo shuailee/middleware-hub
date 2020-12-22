@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.geek.calendar</groupId>
-  <artifactId>geek-calendar-spider</artifactId>
+  <artifactId>spider-demo</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>geek-calendar-spider</name>
+  <name>spider-demo</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

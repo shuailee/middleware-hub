@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FailDataProcessor
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-22 15:10
  **/
 @Slf4j

@@ -1,9 +1,9 @@
 package com.geek.calendar.spider.model;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: PoxyBean
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-20 17:33
  **/
 public class PoxyBean {

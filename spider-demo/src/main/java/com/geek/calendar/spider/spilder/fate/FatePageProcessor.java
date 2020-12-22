@@ -11,9 +11,9 @@ import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import java.text.ParseException;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FatePageProcessor
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-15 11:35
  **/
 

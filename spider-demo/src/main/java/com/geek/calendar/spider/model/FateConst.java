@@ -1,9 +1,9 @@
 package com.geek.calendar.spider.model;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FateConst
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-15 15:34
  **/
 public class FateConst {

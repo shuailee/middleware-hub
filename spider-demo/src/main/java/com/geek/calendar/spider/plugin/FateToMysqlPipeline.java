@@ -19,9 +19,9 @@ import java.util.*;
 
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FateInfo
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-15 14:34
  **/
 @Slf4j

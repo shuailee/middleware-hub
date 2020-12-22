@@ -4,9 +4,9 @@ import com.geek.calendar.spider.model.ErrorlogInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: ErrorlogService
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-17 17:08
  **/
 @Mapper

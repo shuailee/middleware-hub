@@ -23,9 +23,9 @@ import java.util.List;
 
 
 /**
- * @program: geek-calendar-spider
+ * @program: spider-demo
  * @description: FateDownload
- * @author: shuai.li
+ * @author: kelin
  * @create: 2020-04-17 16:30
  **/
 @Slf4j
