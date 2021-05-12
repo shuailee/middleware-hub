@@ -79,6 +79,15 @@
             <version>1.7.3</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.3</version>
+        </dependency>
+
+
     </dependencies>
 
     <!--在父Maven模块中通过dependencyManagement来指定子模块中的Maven依赖版本号,让子项目中引用一个依赖而不用显示的列出版本号-->
